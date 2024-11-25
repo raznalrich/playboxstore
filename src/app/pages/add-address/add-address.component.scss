@@ -1,0 +1,22 @@
+label{
+  color: white;
+}
+.topnotch{
+  border: 1px white solid;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  hr{
+    min-height: 10px;
+    height:2px;
+    border-width: 2px;
+    color: black;
+    width: 300px;
+
+  }
+}
+.form-control{
+  border: 0;
+
+}

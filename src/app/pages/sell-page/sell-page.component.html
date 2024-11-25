@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 style="color: white;">Sell Products</h1>
+</div>
+<div class="container">
+
+
+  @for(f of data; track f){
+    <app-product-card-sell [cards]="f"></app-product-card-sell>
+  }
+</div>

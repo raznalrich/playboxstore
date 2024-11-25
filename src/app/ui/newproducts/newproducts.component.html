@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 style="color: white;">{{data[0].brand}}</h1>
+</div>
+<div class="container">
+@defer () {
+
+
+  <owl-carousel-o [options]="customOptions">
+      <!-- @for(f of data; track f; let last = $last; let first = $first){
+        <ng-template carouselSlide [id]="f.id">
+          <app-productcard [cards]=f></app-productcard>
+        </ng-template>
+
+
+      } -->
+      <ng-container *ngFor="let slide of data">
+        <ng-template carouselSlide [id]="slide.id">
+          <app-productcard [cards]=slide></app-productcard>
+        </ng-template>
+      </ng-container>
+
+    </owl-carousel-o>
+  }
+</div>

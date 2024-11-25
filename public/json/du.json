@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Application Development",
+    "location": "San Francisco, USA",
+    "manager": "Alice Johnson",
+    "teamSize": 150,
+    "projects": 25,
+    "images": "images/app.jpg",
+    "description": "Focuses on building and maintaining high-quality custom software applications."
+  },
+  {
+    "id": 2,
+    "name": "Data Engineering",
+    "location": "New York, USA",
+    "manager": "Michael Smith",
+    "teamSize": 80,
+    "projects": 15,
+    "images": "images/2.jpg",
+    "description": "Specializes in creating robust data pipelines and analytics platforms."
+  },
+  {
+    "id": 3,
+    "name": "Cybersecurity",
+    "location": "Bangalore, India",
+    "manager": "Priya Sharma",
+    "teamSize": 60,
+    "projects": 10,
+    "images": "images/1.jpg",
+    "description": "Provides comprehensive security solutions to safeguard systems and data."
+  },
+  {
+    "id": 4,
+    "name": "Cloud Operations",
+    "location": "London, UK",
+    "manager": "James Wilson",
+    "teamSize": 120,
+    "projects": 20,
+    "images": "images/1.jpg",
+    "description": "Ensures efficient management and optimization of cloud infrastructure."
+  },
+  {
+    "id": 5,
+    "name": "Quality Assurance",
+    "location": "Sydney, Australia",
+    "manager": "Emily Brown",
+    "teamSize": 100,
+    "projects": 30,
+    "images": "images/1.jpg",
+    "description": "Handles end-to-end testing to ensure software meets the highest standards."
+  },
+  {
+    "id": 6,
+    "name": "UI/UX Design",
+    "location": "Toronto, Canada",
+    "manager": "Daniel Green",
+    "teamSize": 40,
+    "projects": 12,
+    "images": "images/1.jpg",
+    "description": "Creates user-centered designs to enhance the digital experience."
+  },
+  {
+    "id": 7,
+    "name": "AI & Machine Learning",
+    "location": "Berlin, Germany",
+    "manager": "Sophia Müller",
+    "teamSize": 75,
+    "projects": 18,
+    "images": "images/1.jpg",
+    "description": "Develops intelligent solutions using cutting-edge AI and machine learning technologies."
+  },
+  {
+    "id": 8,
+    "name": "DevOps",
+    "location": "Tokyo, Japan",
+    "manager": "Hiro Tanaka",
+    "teamSize": 90,
+    "projects": 22,
+    "images": "images/1.jpg",
+    "description": "Streamlines development and operations through automated pipelines and integrations."
+  }
+]

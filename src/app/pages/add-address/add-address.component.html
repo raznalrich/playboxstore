@@ -1,0 +1,138 @@
+<div class="container topnotch" style="text-align: center;padding: 10px;">
+  <div>
+
+    <hr>
+  </div>
+  <div>
+
+    <i class="bi bi-house-add-fill" style="font-size: 50px;"></i>
+    <p>Add address</p>
+  </div>
+  <hr>
+  <div>
+
+  </div>
+</div>
+<div class="container" style="width: 38rem;margin-top: 20px;">
+
+  <form [formGroup]="contactForm" (ngSubmit)="submitAddress()">
+    <div class="mg-3">
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="firstName" placeholder="First Name">
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="lastName" placeholder="Last Name">
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" formControlName="email" placeholder="name@example.com">
+          @if(contactForm.get('email')?.invalid && contactForm.get('email')?.touched){
+
+            @if(contactForm.get('email')?.hasError('email')){
+              <div class="alert alert-danger" role="alert">
+                Enter valid email
+              </div>
+            }@else if (contactForm.get('email')?.hasError('required')) {
+              <div class="alert alert-danger" role="alert">
+                Enter email address
+              </div>
+            }
+          }
+
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="phonenumber" placeholder="+91 9999 9999">
+          @if(contactForm.get('phonenumber')?.invalid && contactForm.get('phonenumber')?.touched){
+
+            @if(contactForm.get('phonenumber')?.hasError('pattern')){
+              <div class="alert alert-danger" role="alert">
+                phone number is error
+              </div>
+            }@else if (contactForm.get('phonenumber')?.hasError('required')) {
+              <div class="alert alert-danger" role="alert">
+                enter phone number
+              </div>
+            }
+          }
+        </div>
+
+      </div>
+    </div>
+    <div class="mb3">
+      <label for="exampleFormControlInput1" class="form-label">Address</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="address" placeholder="Address">
+    </div>
+
+    <div class="mb3">
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Street Name</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="street" placeholder="Street Name">
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">City</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="city" placeholder="City">
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">District</label>
+
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="district" placeholder="District">
+
+        </div>
+      </div>
+    </div>
+    <div class="mb3">
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">State</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="state" placeholder="STATE">
+
+          <!-- <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="state" placeholder="State"> -->
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Zip code</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="zipcode" placeholder="Zip Code">
+          @if(contactForm.get('zipcode')?.invalid && contactForm.get('zipcode')?.touched){
+
+            @if(contactForm.get('zipcode')?.hasError('minlength')){
+              <div class="alert alert-danger" role="alert">
+                Enter minimum 6 digit
+              </div>
+            }@else if (contactForm.get('zipcode')?.hasError('required')) {
+              <div class="alert alert-danger" role="alert">
+                Enter zipcode
+              </div>
+            }
+            @else if (contactForm.get('zipcode')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">
+                exceeded 6 digit
+              </div>
+            }
+          }
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label">Landmark</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="landmark" placeholder="Landmark">
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 mt-3" style="text-align: center;">
+      <button type="submit" [disabled]="contactForm.invalid || isloading" class="btn btn-danger" style="border-radius: 40px;"><i class="bi bi-check2-circle" style="margin-right: 10px;"></i>Confirm Order
+        @if(isloading!=false){
+
+          <app-whiteloader></app-whiteloader>
+        }
+        </button>
+    </div>
+  </form>
+
+</div>

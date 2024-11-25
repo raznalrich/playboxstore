@@ -1,0 +1,27 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(4,2fr);
+}
+app-productcard{
+  padding-left: 10px;
+  padding-top: 20px;
+}
+h1{
+  border-bottom: red 2px solid;
+  padding-bottom: 10px;
+}
+
+.container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.owl-carousel .owl-stage {
+  display: flex;
+  align-items: center;
+}
+
+app-productcard {
+  margin: 0 auto; // Ensure each card is centered
+}
+

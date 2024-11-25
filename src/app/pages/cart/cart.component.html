@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="list-group">
+    @if(firestore.cartcount()!=0){
+      @for(f of firestore.cartid() ; track f){
+        <!-- <app-cartsinglelist [id]="f"></app-cartsinglelist> -->
+         <app-cartsinglelist [id]="f"></app-cartsinglelist>
+      }
+    }
+
+
+  </div>
+
+  <div class="row text-bg-light p-3">
+    @if(firestore.cartcount()!=0){
+      <div class="col">Total Price : </div>
+      <div class="col" style="display: flex;justify-content: end;">{{firestore.totalcartprice() | currency: 'INR':'symbol'}}
+
+        <button type="button" routerLink="/addaddress"   class="btn btn-dark">Checkout</button>
+      </div>
+    }
+    @else {
+      <div class="col"><i class="bi bi-bag" style="padding-right: 10px;"></i>Your Cart is empty</div>
+    }
+
+  </div>
+</div>

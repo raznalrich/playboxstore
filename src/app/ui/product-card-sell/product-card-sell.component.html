@@ -1,0 +1,12 @@
+<div class="card " style="width: 17rem;background-color: #2c2c2c;">
+  <img ngSrc={{cards.image}} width="200" height="300" class="card-img-top" alt="..." priority>
+  <div class="card-body">
+    <h5 class="card-title" style="color: rgb(255, 236, 32);">{{cards.name | slice:0:22}}</h5>
+    <h3 class="card-text" style="color: white;">{{cards.price | currency: 'INR':'symbol'}}</h3>
+<div style="display: flex; justify-content: space-between;">
+
+  <a   class="btn btn-outline-light" style="border-radius: 0;">PT : {{cards.points}}</a>
+  <a routerLink="/sell/{{cards.id}}" class="btn btn-danger" style="border-radius: 0;"><i class="bi bi-cart-plus" style="padding-right: 5px;"></i>Sell Now</a>
+</div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+
+
+  <div class="card mb-3" style="max-width: 100%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{data.image}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <p class="card-text">{{data.brand}}</p>
+          <h2 class="card-title">{{data.name}}</h2>
+          <!-- <p class="card-text">{{data.description}}</p> -->
+          <hr>
+          <div style="display: flex;">
+
+            <h3 class="card-text"><span style="color: red;">Cash :</span> {{data.price | currency: 'INR':'symbol' }}</h3>  <h3 class="card-text" style="margin-left: 30px;"><span style="color: red;">Point :</span> {{data.points}}</h3>
+          </div>
+          <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+          <button type="button" class="btn btn-danger" style="border-radius: 0; margin-top: 30px;">Add to Cart</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
