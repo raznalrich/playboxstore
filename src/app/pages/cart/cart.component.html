@@ -14,9 +14,9 @@
   <div class="row text-bg-light p-3">
     @if(firestore.cartcount()!=0){
       <div class="col">Total Price : </div>
-      <div class="col" style="display: flex;justify-content: end;">{{firestore.totalcartprice() | currency: 'INR':'symbol'}}
+      <div class="col" style="display: flex;justify-content: end;margin-right: 50px;">{{firestore.totalcartprice() | currency: 'INR':'symbol'}}
 
-        <button type="button" routerLink="/addaddress"   class="btn btn-dark">Checkout</button>
+        <button type="button" routerLink="/addaddress"  class="btn btn-dark">Checkout</button>
       </div>
     }
     @else {

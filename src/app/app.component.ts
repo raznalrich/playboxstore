@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from "./ui/nav/nav.component";
+import { FirestoreService } from './firestore.service';
+import { FireauthService } from './fireauth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,6 @@ import { NavComponent } from "./ui/nav/nav.component";
 })
 export class AppComponent {
   title = 'playboxecommerce';
+  constructor(public firestore:FirestoreService,public auth:FireauthService){}
+
 }

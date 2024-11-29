@@ -10,6 +10,8 @@ import { OrderConfirmationComponent } from './pages/order-confirmation/order-con
 import { RentPageComponent } from './pages/rent-page/rent-page.component';
 import { SellPageComponent } from './pages/sell-page/sell-page.component';
 import { SellSinglePageComponent } from './ui/sell-single-page/sell-single-page.component';
+import { ProductListComponent } from './pages/admin/product-list/product-list.component';
+import { OrdersListComponent } from './pages/admin/orders-list/orders-list.component';
 
 export const routes: Routes = [
 
@@ -36,7 +38,14 @@ export const routes: Routes = [
   },
 
   {
-    path:'admin',component: AdminDashboardComponent
+    path:'admin',component: AdminDashboardComponent,children:[
+      {
+        path:'productlist', component: ProductListComponent
+      },
+      {
+        path:'orders', component: OrdersListComponent
+      }
+    ]
   },
   {
     path:'products/:id',component: SingleproductpageComponent

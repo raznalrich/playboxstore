@@ -24,7 +24,14 @@ export class LoginComponent {
       .then(() => {
         console.log('Login successful');
         this.authService.listenToAuthStateChanges();
-        this.router.navigate(['/']);
+        if(this.email!='admin@playbox.com'){
+
+          this.router.navigate(['/']);
+        }
+        else{
+          this.router.navigate(['/admin/productlist']);
+
+        }
       })
       .catch((error) => {
         this.errorMessage = error.message;

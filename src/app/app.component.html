@@ -12,7 +12,10 @@
 </style>
 
 <main class="main">
-<app-nav></app-nav>
+  @if(auth.currentUserName()!='admin@playbox.com'){
+
+    <app-nav></app-nav>
+  }
 </main>
 
 <router-outlet />

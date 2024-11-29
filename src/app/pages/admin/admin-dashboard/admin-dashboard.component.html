@@ -1,3 +1,13 @@
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
+<!-- <div class="container" style="width: 100%;"> -->
+<div class="row">
+  <div class="col-2" style="background-color: black;padding: 0;margin: 0;">
+    <app-sidebar style="position: sticky;"></app-sidebar>
+
+  </div>
+  <div class="col" style="background-color: white;width: 80%;">
+<app-adminnav></app-adminnav>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<!-- </div> -->
 
