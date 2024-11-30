@@ -26,6 +26,13 @@ export class FirestoreService {
 
     return collectionData(productsRef, { idField: 'id' });
   }
+
+  getorders(): Observable<Product[]> {
+    const productsRef = collection(this.firestore, 'orders');
+    console.log(collectionData(productsRef, { idField: 'id' }));
+
+    return collectionData(productsRef, { idField: 'id' });
+  }
   getSellProducts(): Observable<Product[]> {
     const productsRef = collection(this.firestore, 'sell_products');
     console.log(collectionData(productsRef, { idField: 'id' }));
@@ -90,7 +97,7 @@ addAddressDetails(addressDetails: any): Observable<any> {
     this.gettotalprice();
 
   }
-  
+
   removecartcount(id: number) {
 
     this.cartcount.update(value => value - 1 );

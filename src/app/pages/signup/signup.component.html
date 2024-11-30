@@ -1,10 +1,16 @@
 <div class="container" >
   <div class="card text-center">
     <div class="card-header" style="background-color: red;color: aliceblue;">
-      <h3>Login</h3>
+      <h3>create Account</h3>
     </div>
     <div class="card-body">
-  <form (ngSubmit)="onLogin()">
+  <form (ngSubmit)="onSignup()">
+    <!-- <input type="text" id="fullname" [(ngModel)]="fullname" name="fullname" required /> -->
+
+    <div class="mb-3">
+      <!-- <label for="exampleFormControlInput1" class="form-label">Email address</label> -->
+      <input type="text" class="form-control" id="fullname" [(ngModel)]="fullname" name="fullname" required placeholder="Fullname">
+    </div>
     <div class="mb-3">
       <!-- <label for="exampleFormControlInput1" class="form-label">Email address</label> -->
       <input type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)]="email" name="email" required placeholder="Email">
@@ -23,17 +29,12 @@
     <label for="password">Password:</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" required />
   </div> -->
-  <button type="submit" class="btn btn-danger" style="border-radius: 0;">Login
-    @if(isloading!=false){
-
-      <app-whiteloader></app-whiteloader>
-    }
-  </button>
+  <button type="submit" class="btn btn-danger" style="border-radius: 0;">SignUp</button>
 </form>
 </div>
 <div class="card-footer text-body-secondary">
-  Don't have an account? <a class="icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;" routerLink="/signup">
-    Create Account
+  Already own an account? <a class="icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;" routerLink="/login">
+    Login
     <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
   </a>
 </div>

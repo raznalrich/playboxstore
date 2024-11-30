@@ -12,6 +12,7 @@ import { SellPageComponent } from './pages/sell-page/sell-page.component';
 import { SellSinglePageComponent } from './ui/sell-single-page/sell-single-page.component';
 import { ProductListComponent } from './pages/admin/product-list/product-list.component';
 import { OrdersListComponent } from './pages/admin/orders-list/orders-list.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
 
@@ -32,6 +33,9 @@ export const routes: Routes = [
   },
   {
     path:'login',component: LoginComponent
+  },
+  {
+    path:'signup',component: SignupComponent
   },
   {
     path:'addaddress',component: AddAddressComponent

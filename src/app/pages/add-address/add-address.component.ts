@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { LoaderComponent } from "../../ui/loader/loader.component";
 import { WhiteloaderComponent } from "../../ui/whiteloader/whiteloader.component";
 import { Router } from '@angular/router';
+import { FireauthService } from '../../fireauth.service';
 
 @Component({
   selector: 'app-add-address',
@@ -13,15 +14,22 @@ import { Router } from '@angular/router';
   styleUrl: './add-address.component.scss'
 })
 export class AddAddressComponent {
+  email:any = '';
+  total:any = '';
+  cartproducts: any[] = [];
+  constructor(public api:FirestoreService,private router: Router,public auth:FireauthService,public store:FirestoreService){}
+
 
   isloading:boolean =false;
   contactForm = new FormGroup({
     firstName : new FormControl(''),
     lastName : new FormControl(''),
-    userId: new FormControl('hdfghdfghdfghdfgh'),
-    product:new FormControl(['fghfghghjgjhfghjgh','ghjgfjhghjgfhjfghj']),
-    orderDate: new FormControl('12/12/12'),
-    email : new FormControl('',[Validators.required,Validators.email]),
+    // userId: new FormControl('hdfghdfghdfghdfgh'),
+    product:new FormControl(['']),
+    orderDate: new FormControl(Date().toString()),
+    status: new FormControl('Progress'),
+    totalAmount : new FormControl(0),
+    email : new FormControl(this.email,[Validators.required,Validators.email]),
     phonenumber : new FormControl('',[Validators.required,Validators.pattern('^[0-9]+$')]),
     address : new FormControl(''),
     street : new FormControl(''),
@@ -33,8 +41,14 @@ export class AddAddressComponent {
     landmark : new FormControl(''),
     gender : new FormControl(''),
   })
-  constructor(public api:FirestoreService,private router: Router){}
+
   ngOnInit() {
+    this.email = this.auth.currentUserName()
+    this.cartproducts = this.store.cartid()
+    this.total = this.store.totalcartprice()
+    this.contactForm.get('product')?.setValue(this.cartproducts);
+    this.contactForm.get('email')?.setValue(this.email);
+    this.contactForm.get('totalAmount')?.setValue(this.total);
     this.contactForm.get('zipcode')?.valueChanges.subscribe((pincode) => {
       // console.log(pincode);
 

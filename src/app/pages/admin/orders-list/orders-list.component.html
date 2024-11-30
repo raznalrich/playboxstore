@@ -15,19 +15,27 @@
     <tr>
       <th scope="col">Sl.No</th>
       <th scope="col">Products</th>
-      <th scope="col">Category</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Order date</th>
       <th scope="col">Price</th>
-      <th scope="col">Actions</th>
+
+      <th scope="col">action</th>
     </tr>
   </thead>
   <tbody>
     @for(f of data ;track f ; let i = $index){
       <tr>
         <th scope="row">{{i}}</th>
-        <td><img src="{{f.image}}"  alt="" srcset="">{{f.name}}</td>
-        <td>{{f.brand}}</td>
-        <td>{{f.price | currency: 'INR':'symbol'}}</td>
-        <td><i class="bi bi-pencil-square"></i> {{' '}}<i class="bi bi-trash3-fill"></i></td>
+        <td>
+          @for(k of f.product ; track k){
+
+            <app-orderproductlist id="k"></app-orderproductlist>
+          }
+        </td>
+        <td>{{f.firstName}}</td>
+        <td>{{f.orderDate | date: 'mediumDate'}}</td>
+        <td>{{f.totalAmount | currency: 'INR':'symbol'}}</td>
+        <td>{{f.status}}<i class="bi bi-trash3-fill"></i></td>
       </tr>
     }
 
@@ -35,4 +43,6 @@
 
   </tbody>
 </table>
+
+
 </div>

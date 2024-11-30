@@ -6,6 +6,7 @@ import { NewproductsComponent } from "../../ui/newproducts/newproducts.component
 import { FireauthService } from '../../fireauth.service';
 import { ProductsbybrandComponent } from "../../productsbybrand/productsbybrand.component";
 import { FooterComponent } from "../../ui/footer/footer.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -15,7 +16,7 @@ import { FooterComponent } from "../../ui/footer/footer.component";
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-  constructor(public firestore:FirestoreService,public auth:FireauthService){}
+  constructor(public firestore:FirestoreService,public auth:FireauthService,private router: Router){}
   data:any;
   console:any;
 
@@ -30,6 +31,23 @@ export class HomepageComponent {
     });
     // console.log('hgsf');
     this.getConsole();
+    this.autoLogin();
+  }
+  autoLogin() {
+    const storedEmail = localStorage.getItem('email'); // Check for stored email
+    console.log(storedEmail);
+
+    if (storedEmail) {
+      // this.authService.listenToAuthStateChanges(); // Start listening to auth changes
+      if (storedEmail !== 'admin@playbox.com') {
+        console.log('Auto-login as user:', storedEmail);
+        this.auth.checkauth(storedEmail);
+        this.router.navigate(['/']);
+      } else {
+        console.log('Auto-login as admin:', storedEmail);
+        this.router.navigate(['/admin/productlist']);
+      }
+    }
   }
   getConsole(){
     this.firestore.getProducts().subscribe((res: any) => {
