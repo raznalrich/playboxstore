@@ -27,8 +27,22 @@ export class FirestoreService {
     return collectionData(productsRef, { idField: 'id' });
   }
 
+  // getsellProducts(): Observable<Product[]> {
+  //   const productsRef = collection(this.firestore, 'sell_products');
+  //   console.log(collectionData(productsRef, { idField: 'id' }));
+
+  //   return collectionData(productsRef, { idField: 'id' });
+  // }
+
   getorders(): Observable<Product[]> {
     const productsRef = collection(this.firestore, 'orders');
+    console.log(collectionData(productsRef, { idField: 'id' }));
+
+    return collectionData(productsRef, { idField: 'id' });
+  }
+
+  getsellorders(): Observable<Product[]> {
+    const productsRef = collection(this.firestore, 'sell_orders');
     console.log(collectionData(productsRef, { idField: 'id' }));
 
     return collectionData(productsRef, { idField: 'id' });
@@ -46,7 +60,29 @@ export class FirestoreService {
 address = signal('');
 mobile = signal(0);
 
+//sell orders
 
+updatesellOrderStatus(orderId: string, status: string): Observable<void> {
+  if (!orderId) {
+    return throwError(() => new Error('Order ID is required'));
+  }
+
+  // Reference to the specific order document
+  const orderDocRef = doc(this.firestore, `sell_orders/${orderId}`);
+
+  return new Observable<void>((observer) => {
+    updateDoc(orderDocRef, { status })
+      .then(() => {
+        console.log(`Order ${orderId} status updated to ${status}`);
+        observer.next();
+        observer.complete();
+      })
+      .catch((error) => {
+        console.error('Error updating order status:', error);
+        observer.error(error);
+      });
+  });
+}
 
 
 // Update order status
@@ -185,6 +221,27 @@ addselldetails(addressDetails: any): Observable<any> {
     }
 
     const productDocRef = doc(this.firestore, `products/${productId}`);
+    return docData(productDocRef, { idField: 'id' })
+      .pipe(
+        map(product => {
+          if (!product) {
+            throw new Error('Product not found');
+          }
+          return product as Product;
+        }),
+        catchError(error => {
+          console.error('Error fetching product:', error);
+          return throwError(() => error);
+        })
+      );
+  }
+
+  getsellProductById(productId: string): Observable<Product> {
+    if (!productId) {
+      return throwError(() => new Error('Product ID is required'));
+    }
+
+    const productDocRef = doc(this.firestore, `sell_products/${productId}`);
     return docData(productDocRef, { idField: 'id' })
       .pipe(
         map(product => {

@@ -18,6 +18,8 @@ import { Ps4Component } from './pages/buypages/ps4/ps4.component';
 import { Ps3Component } from './pages/buypages/ps3/ps3.component';
 import { Ps5gamesComponent } from './pages/buypages/ps5games/ps5games.component';
 import { Ps4gamesComponent } from './pages/buypages/ps4games/ps4games.component';
+import { SellproductsComponent } from './pages/admin/sellproducts/sellproducts.component';
+import { SellordersComponent } from './pages/admin/sellorders/sellorders.component';
 
 export const routes: Routes = [
 
@@ -68,6 +70,12 @@ export const routes: Routes = [
       },
       {
         path:'orders', component: OrdersListComponent
+      },
+      {
+        path:'sellproducts', component: SellproductsComponent
+      },
+      {
+        path:'sellorders', component: SellordersComponent
       }
     ]
   },
@@ -78,3 +86,4 @@ export const routes: Routes = [
     path:'sell/:id',component: SellSinglePageComponent
   },
 ];
+
