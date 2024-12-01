@@ -16,8 +16,167 @@
 
             <h3 class="card-text"><span style="color: red;">Cash :</span> {{data.price | currency: 'INR':'symbol' }}</h3>  <h3 class="card-text" style="margin-left: 30px;"><span style="color: red;">Point :</span> {{data.points}}</h3>
           </div>
+          <form [formGroup]="sellform" (ngSubmit)="submitAddress()">
+            <div class="mg-3">
+              <div class="row">
+                <div class="col">
+                  <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="firstName" placeholder="First Name">
+                </div>
+                <div class="col">
+                  <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="lastName" placeholder="Last Name">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="row">
+                <div class="col">
+                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" formControlName="email" placeholder="name@example.com">
+                  @if(sellform.get('email')?.invalid && sellform.get('email')?.touched){
+
+                    @if(sellform.get('email')?.hasError('email')){
+                      <div class="alert alert-danger" role="alert">
+                        Enter valid email
+                      </div>
+                    }@else if (sellform.get('email')?.hasError('required')) {
+                      <div class="alert alert-danger" role="alert">
+                        Enter email address
+                      </div>
+                    }
+                  }
+
+                </div>
+                <div class="col">
+                  <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="phonenumber" placeholder="+91 9999 9999">
+                  @if(sellform.get('phonenumber')?.invalid && sellform.get('phonenumber')?.touched){
+
+                    @if(sellform.get('phonenumber')?.hasError('pattern')){
+                      <div class="alert alert-danger" role="alert">
+                        phone number is error
+                      </div>
+                    }@else if (sellform.get('phonenumber')?.hasError('required')) {
+                      <div class="alert alert-danger" role="alert">
+                        enter phone number
+                      </div>
+                    }
+                  }
+                </div>
+
+              </div>
+            </div>
+            <div class="mb3">
+              <label for="exampleFormControlInput1" class="form-label">Address</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="address" placeholder="Address">
+            </div>
+
+
+            <div class="mb3">
+              <div class="row">
+
+                <div class="col">
+                  <label for="exampleFormControlInput1" class="form-label">Zip code</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="zipcode" placeholder="Zip Code">
+                  @if(sellform.get('zipcode')?.invalid && sellform.get('zipcode')?.touched){
+
+                    @if(sellform.get('zipcode')?.hasError('minlength')){
+                      <div class="alert alert-danger" role="alert">
+                        Enter minimum 6 digit
+                      </div>
+                    }@else if (sellform.get('zipcode')?.hasError('required')) {
+                      <div class="alert alert-danger" role="alert">
+                        Enter zipcode
+                      </div>
+                    }
+                    @else if (sellform.get('zipcode')?.hasError('maxlength')) {
+                      <div class="alert alert-danger" role="alert">
+                        exceeded 6 digit
+                      </div>
+                    }
+                  }
+                </div>
+
+              </div>
+            </div>
+            <!-- Payment Mode -->
+            <div class="mb-3">
+              <label for="paymentMode" class="form-label">Payment Mode</label>
+
+              <button (click)="setcash()" type="button" class="btn btn-outline-primary">Cash</button>
+<button type="button" class="btn btn-outline-secondary">Points</button>
+            </div>
+
+            @if(cashid==1){
+              <button (click)="setupi()"  type="button" class="btn btn-outline-primary">UPI</button>
+<button (click)="setbank()" type="button" class="btn btn-outline-secondary">Bank</button>
+            }
+
+            @if(upiindex==1){
+              <div class="mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="upi" placeholder="UPI">
+              </div>
+            }@else if(bankindex==1){
+              <div class="mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="accno" placeholder="Account No">
+                <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="ifsc" placeholder="IFSC Code">
+                <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="branch" placeholder="Branch">
+                <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="holdername" placeholder="Holder Name">
+              </div>
+            }
+
+
+
+            <!-- Conditional Fields for Cash -->
+            <div *ngIf="sellform.get('paymentMode')?.value === 'cash'" class="mb-3">
+              <label for="cashMode" class="form-label">Cash Mode</label>
+              <select
+                id="cashMode"
+                class="form-select"
+                formControlName="cashMode"
+              >
+                <option value="upi">UPI</option>
+                <option value="bank">Bank</option>
+              </select>
+            </div>
+
+            <!-- Conditional Field for UPI -->
+            <div *ngIf="sellform.get('cashMode')?.value === 'upi'" class="mb-3">
+              <label for="upiId" class="form-label">UPI ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="upiId"
+                formControlName="upiId"
+                placeholder="Enter UPI ID"
+              />
+            </div>
+
+            <!-- Conditional Field for Bank -->
+            <div *ngIf="sellform.get('cashMode')?.value === 'bank'" class="mb-3">
+              <label for="bankDetails" class="form-label">Bank Account Details</label>
+              <input
+                type="text"
+                class="form-control"
+                id="bankDetails"
+                formControlName="bankDetails"
+                placeholder="Enter Bank Account Details"
+              />
+            </div>
+
+            <div class="mb-3 mt-3" style="text-align: center;">
+              <button type="submit" [disabled]="sellform.invalid || isloading" class="btn btn-danger" style="border-radius: 40px;"><i class="bi bi-check2-circle" style="margin-right: 10px;"></i>Confirm Order
+                @if(isloading!=false){
+
+                  <app-whiteloader></app-whiteloader>
+                }
+                </button>
+            </div>
+          </form>
+
           <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
-          <button type="button" class="btn btn-danger" style="border-radius: 0; margin-top: 30px;">Add to Cart</button>
+          <!-- <button type="button" class="btn btn-danger" style="border-radius: 0; margin-top: 30px;">Add to Cart</button> -->
 
         </div>
       </div>

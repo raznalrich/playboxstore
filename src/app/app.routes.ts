@@ -13,6 +13,11 @@ import { SellSinglePageComponent } from './ui/sell-single-page/sell-single-page.
 import { ProductListComponent } from './pages/admin/product-list/product-list.component';
 import { OrdersListComponent } from './pages/admin/orders-list/orders-list.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { Ps5Component } from './pages/buypages/ps5/ps5.component';
+import { Ps4Component } from './pages/buypages/ps4/ps4.component';
+import { Ps3Component } from './pages/buypages/ps3/ps3.component';
+import { Ps5gamesComponent } from './pages/buypages/ps5games/ps5games.component';
+import { Ps4gamesComponent } from './pages/buypages/ps4games/ps4games.component';
 
 export const routes: Routes = [
 
@@ -39,6 +44,21 @@ export const routes: Routes = [
   },
   {
     path:'addaddress',component: AddAddressComponent
+  },
+  {
+    path:'ps5',component: Ps5Component
+  },
+  {
+    path:'ps4',component: Ps4Component
+  },
+  {
+    path:'ps3',component: Ps3Component
+  },
+  {
+    path:'ps5games',component: Ps5gamesComponent
+  },
+  {
+    path:'ps4games',component: Ps4gamesComponent
   },
 
   {

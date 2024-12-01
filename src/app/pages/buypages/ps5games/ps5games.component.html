@@ -1,0 +1,18 @@
+<div class="container">
+
+  <h1 style="color: white;">PS5 Games</h1>
+</div>
+<div class="container">
+
+@if(data!=null){
+
+  @for(f of data;track f){
+<app-productcard [cards]="f"></app-productcard>
+  }
+
+}@else {
+  <div class="alert alert-warning" role="alert">
+   No products
+  </div>
+}
+</div>

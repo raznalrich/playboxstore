@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, docData, query, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 export interface Product {
@@ -46,6 +46,32 @@ export class FirestoreService {
 address = signal('');
 mobile = signal(0);
 
+
+
+
+// Update order status
+updateOrderStatus(orderId: string, status: string): Observable<void> {
+  if (!orderId) {
+    return throwError(() => new Error('Order ID is required'));
+  }
+
+  // Reference to the specific order document
+  const orderDocRef = doc(this.firestore, `orders/${orderId}`);
+
+  return new Observable<void>((observer) => {
+    updateDoc(orderDocRef, { status })
+      .then(() => {
+        console.log(`Order ${orderId} status updated to ${status}`);
+        observer.next();
+        observer.complete();
+      })
+      .catch((error) => {
+        console.error('Error updating order status:', error);
+        observer.error(error);
+      });
+  });
+}
+
 getProductsByBrand(brand: string): Observable<Product[]> {
   if (!brand) {
     return throwError(() => new Error('Brand is required'));
@@ -73,6 +99,22 @@ getProductsByBrand(brand: string): Observable<Product[]> {
 
 addAddressDetails(addressDetails: any): Observable<any> {
   const ordersRef = collection(this.firestore, 'orders');
+
+  return new Observable((observer) => {
+    addDoc(ordersRef, addressDetails)
+      .then(() => {
+        observer.next({ success: true, message: 'Address added successfully!' });
+        observer.complete();
+      })
+      .catch((error) => {
+        console.error('Error adding address:', error);
+        observer.error({ success: false, message: error.message });
+      });
+  });
+}
+
+addselldetails(addressDetails: any): Observable<any> {
+  const ordersRef = collection(this.firestore, 'sell_orders');
 
   return new Observable((observer) => {
     addDoc(ordersRef, addressDetails)

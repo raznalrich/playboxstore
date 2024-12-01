@@ -26,8 +26,6 @@ export class HomepageComponent {
       // console.log(this.data);
       // console.log(this.auth.authenticate());
 
-
-
     });
     // console.log('hgsf');
     this.getConsole();
