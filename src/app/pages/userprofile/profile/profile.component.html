@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <!-- Header with Navigation -->
+  <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" >Account</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/myorders">My Orders</a>
+      </li>
+    </ul>
+    <button class="btn btn-dark">Edit Account</button>
+  </div>
+
+  <!-- User Profile Section -->
+  <div class="profile-header text-center mb-4">
+    <img
+      src="{{data[0].avatar}}"
+      alt="Profile Picture"
+      class="rounded-circle border border-2"
+    />
+    <h2 class="mt-3">{{data[0].fullname}}</h2>
+  </div>
+
+  <!-- Wallet Section -->
+  <div class="wallet-section text-center mb-4">
+    <div class="wallet-balance bg-danger text-white py-2 rounded">
+      <h5>Wallet: {{data[0].points}}</h5>
+    </div>
+  </div>
+
+  <!-- User Details Section -->
+  <div class="user-details">
+    <p><strong>Email:</strong> {{auth.currentUserName()}}</p>
+    <p><strong>Address:</strong> <em>Address not set</em></p>
+    <p><strong>Mobile:</strong> Not set</p>
+    <p><strong>Date Joined:</strong> {{data[0].dateJoined | date: 'mediumDate'}}</p>
+  </div>
+</div>

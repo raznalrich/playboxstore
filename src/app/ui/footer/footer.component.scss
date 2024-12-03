@@ -2,6 +2,7 @@ ul{
   list-style: none;
   li{
     color: white;
+    cursor: pointer;
     i{
       margin-right: 10px;
     }
@@ -9,4 +10,34 @@ ul{
 }
 .container{
   margin-top: 50px;
+}
+.container1{
+  margin-top: 60px;
+  background-color: rgb(17, 17, 17);
+  padding: 5px;
+  // margin: 0;
+  width: 100%;
+  .row{
+    width: 100%;
+    img{
+      width: 200px;
+    }
+    hr{
+      color: white;
+      border: 2px white solid;
+    }
+    p{
+      color: white;
+    }
+    ul{
+      list-style: none;
+      li{
+        color: white;
+        padding-top: 5px;
+        i{
+          padding-right: 10px;
+        }
+      }
+    }
+  }
 }

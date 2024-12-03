@@ -11,6 +11,16 @@ export interface Product {
   // Add other product properties as needed
 }
 
+export interface User {
+  id?: string;
+  fullname: string;
+  dateJoined: string;
+  points: number;
+  mobile: number;
+  avatar?: string;
+  // Add other product properties as needed
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -106,6 +116,56 @@ updateOrderStatus(orderId: string, status: string): Observable<void> {
         observer.error(error);
       });
   });
+}
+
+getUserbyemail(email: string): Observable<User[]> {
+  if (!email) {
+    return throwError(() => new Error('Brand is required'));
+  }
+
+  // Reference to the 'products' collection with a query filter for the brand
+  const productsRef = query(
+    collection(this.firestore, 'users'),
+    where('email', '==', email)
+  );
+
+  return collectionData(productsRef, { idField: 'id' }).pipe(
+    map(users => {
+      if (!users) {
+        throw new Error('No user found for the specified brand');
+      }
+      return users as User[];
+    }),
+    catchError(error => {
+      console.error('Error fetching user by brand:', error);
+      return throwError(() => error);
+    })
+  );
+}
+
+getOrdersbyemail(email: string): Observable<any[]> {
+  if (!email) {
+    return throwError(() => new Error('Brand is required'));
+  }
+
+  // Reference to the 'products' collection with a query filter for the brand
+  const productsRef = query(
+    collection(this.firestore, 'orders'),
+    where('email', '==', email)
+  );
+
+  return collectionData(productsRef, { idField: 'id' }).pipe(
+    map(orders => {
+      if (!orders) {
+        throw new Error('No user found for the specified brand');
+      }
+      return orders as any[];
+    }),
+    catchError(error => {
+      console.error('Error fetching user by brand:', error);
+      return throwError(() => error);
+    })
+  );
 }
 
 getProductsByBrand(brand: string): Observable<Product[]> {
@@ -215,6 +275,8 @@ addselldetails(addressDetails: any): Observable<any> {
       })
     );
   }
+
+
   getProductById(productId: string): Observable<Product> {
     if (!productId) {
       return throwError(() => new Error('Product ID is required'));

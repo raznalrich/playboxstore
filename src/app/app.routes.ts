@@ -20,6 +20,8 @@ import { Ps5gamesComponent } from './pages/buypages/ps5games/ps5games.component'
 import { Ps4gamesComponent } from './pages/buypages/ps4games/ps4games.component';
 import { SellproductsComponent } from './pages/admin/sellproducts/sellproducts.component';
 import { SellordersComponent } from './pages/admin/sellorders/sellorders.component';
+import { ProfileComponent } from './pages/userprofile/profile/profile.component';
+import { MyordersComponent } from './pages/userprofile/myorders/myorders.component';
 
 export const routes: Routes = [
 
@@ -34,6 +36,12 @@ export const routes: Routes = [
   },
   {
     path:'rentPage',component: RentPageComponent
+  },
+  {
+    path:'userProfile',component: ProfileComponent
+  },
+  {
+    path:'myorders',component: MyordersComponent
   },
   {
     path:'sell',component: SellPageComponent
