@@ -16,6 +16,7 @@ import { SellordersproductlistComponent } from "../../../ui/sellordersproductlis
 export class SellordersComponent {
   constructor(public firestore:FirestoreService,public auth:FireauthService){}
   data:any;
+  email:any;
   console:any;
   expandedIndex: number | null = null;
 
@@ -52,8 +53,9 @@ export class SellordersComponent {
   }
 
   // Update status in Firebase
-  updateStatus(orderId: string, newStatus: string): void {
-    this.firestore.updatesellOrderStatus(orderId, newStatus).subscribe(() => {
+  updateStatus(orderId: string, newStatus: string,points:number,email:any): void {
+    // this.email = this.auth.currentUserName()
+    this.firestore.updatesellOrderStatus(orderId, newStatus,email,points).subscribe(() => {
       console.log(`Order ${orderId} status updated to ${newStatus}`);
       alert(`Status updated successfully!`);
     });

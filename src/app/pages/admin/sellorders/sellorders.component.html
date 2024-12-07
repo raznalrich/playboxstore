@@ -17,6 +17,7 @@
       <th scope="col">Products</th>
       <th scope="col">Customer</th>
       <th scope="col">Order date</th>
+      <th scope="col">Payment</th>
       <th scope="col">Price</th>
 
       <th scope="col">action</th>
@@ -34,6 +35,7 @@
         </td>
         <td>{{f.firstName}}</td>
         <td>{{f.orderDate | date: 'mediumDate'}}</td>
+        <td>{{f.paymentmode}}</td>
         <td>{{f.totalAmount | currency: 'INR':'symbol'}}</td>
         <td style="display: flex;align-items: center;justify-content: space-between;">
           <div class="statusbar">
@@ -44,7 +46,7 @@
           </button>
 
         <!-- Order Details Section -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -53,6 +55,7 @@
               </div>
               <div class="modal-body">
                 <div *ngIf="expandedIndex === i" class="order-details p-3 border mt-2">
+                  <p><strong>Points</strong>{{f.points}}</p>
                   <p><strong>Address:</strong> {{ f.address }}</p>
                   <p><strong>City:</strong> {{ f.city }}</p>
                   <p><strong>District:</strong> {{ f.district }}</p>
@@ -63,7 +66,7 @@
                     id="statusDropdown"
                     class="form-select mt-2"
                     [(ngModel)]="f.status"
-                    (change)="updateStatus(f.id, f.status)"
+                    (change)="updateStatus(f.id, f.status,f.points,f.email)"
                   >
                     <option value="Pending">Pending</option>
                     <option value="Progress">Progress</option>

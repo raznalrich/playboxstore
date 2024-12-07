@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, docData, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 export interface Product {
@@ -72,9 +72,9 @@ mobile = signal(0);
 
 //sell orders
 
-updatesellOrderStatus(orderId: string, status: string): Observable<void> {
-  if (!orderId) {
-    return throwError(() => new Error('Order ID is required'));
+updatesellOrderStatus(orderId: string, status: string, userEmail: string,productpoints:any): Observable<void> {
+  if (!orderId || !userEmail) {
+    return throwError(() => new Error('Order ID and User Email are required'));
   }
 
   // Reference to the specific order document
@@ -84,8 +84,53 @@ updatesellOrderStatus(orderId: string, status: string): Observable<void> {
     updateDoc(orderDocRef, { status })
       .then(() => {
         console.log(`Order ${orderId} status updated to ${status}`);
-        observer.next();
-        observer.complete();
+        // Fetch the user document based on the email
+        const userQuery = query(
+          collection(this.firestore, 'users'),
+          where('email', '==', userEmail)
+        );
+
+        getDocs(userQuery)
+          .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+              console.error('No matching user found');
+              observer.error(new Error('No matching user found'));
+              return;
+            }
+
+            const userDoc = querySnapshot.docs[0];
+            const userRef = doc(this.firestore, `users/${userDoc.id}`);
+            const userData = userDoc.data();
+            const currentPoints = userData['points'] || 0;
+            console.log(currentPoints);
+
+
+            // Determine points to add based on the status
+            let pointsToAdd = 0;
+            switch (status) {
+              case 'Completed':
+                pointsToAdd = productpoints; // Example points for a completed order
+                break;
+              case 'Cancelled':
+                pointsToAdd = 0; // Example deduction for a cancelled order
+                break;
+            }
+
+            updateDoc(userRef, { points: currentPoints + pointsToAdd })
+              .then(() => {
+                console.log(`User points updated to ${currentPoints + pointsToAdd}`);
+                observer.next();
+                observer.complete();
+              })
+              .catch((error) => {
+                console.error('Error updating user points:', error);
+                observer.error(error);
+              });
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error);
+            observer.error(error);
+          });
       })
       .catch((error) => {
         console.error('Error updating order status:', error);
@@ -93,7 +138,6 @@ updatesellOrderStatus(orderId: string, status: string): Observable<void> {
       });
   });
 }
-
 
 // Update order status
 updateOrderStatus(orderId: string, status: string): Observable<void> {
